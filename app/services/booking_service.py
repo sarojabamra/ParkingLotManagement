@@ -3,7 +3,7 @@ from datetime import datetime
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.constants import ParkingHistoryStatus, IST
+from app.constants import IST, ParkingHistoryStatus
 from app.models.parking_history import ParkingHistory
 from app.models.user import User
 from app.schemas.parking_history import BookingCreate, BookingResponse

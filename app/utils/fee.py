@@ -1,5 +1,6 @@
-from datetime import datetime, timedelta
-from app.constants import ParkingType, IST
+from datetime import datetime
+
+from app.constants import ParkingType
 
 HOURLY_FEE_TWO_WHEELER = 10
 HOURLY_FEE_FOUR_WHEELER = 20

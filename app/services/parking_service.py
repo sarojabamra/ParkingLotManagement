@@ -1,15 +1,15 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.constants import (
-    UserRole,
-    ParkingHistoryStatus,
     IST,
+    ParkingHistoryStatus,
+    UserRole,
 )
-from app.models.parking_space import ParkingSpace
 from app.models.parking_history import ParkingHistory
+from app.models.parking_space import ParkingSpace
 from app.models.user import User
 from app.schemas.parking_history import (
     ParkingLockRequest,
@@ -17,18 +17,18 @@ from app.schemas.parking_history import (
     ParkingUnlockRequest,
     ParkingUnlockResponse,
 )
-from app.utils.parking import (
-    find_parking_space,
-    decrease_parking_availability,
-    increase_parking_availability,
-    check_vehicle_active_parking_session,
-    activate_booking,
-    create_immediate_parking,
-)
-from app.utils.fee import calculate_parking_fee
 from app.schemas.parking_space import (
     AdminAvailabilityResponse,
     PublicAvailabilityResponse,
+)
+from app.utils.fee import calculate_parking_fee
+from app.utils.parking import (
+    activate_booking,
+    check_vehicle_active_parking_session,
+    create_immediate_parking,
+    decrease_parking_availability,
+    find_parking_space,
+    increase_parking_availability,
 )
 
 

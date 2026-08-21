@@ -5,8 +5,7 @@ from typing import Any
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.constants import ParkingHistoryStatus, ParkingType, IST
-
+from app.constants import IST, ParkingHistoryStatus, ParkingType
 from app.models.parking_history import ParkingHistory
 from app.models.parking_space import ParkingSpace
 from app.models.user import User

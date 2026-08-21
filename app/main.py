@@ -1,12 +1,12 @@
+from contextlib import asynccontextmanager
 from datetime import datetime
 
 from fastapi import FastAPI
 
 from app.database import Base, engine
 from app.routers import admin, auth, booking, parking
+from app.scheduler import shutdown_scheduler, start_scheduler
 from app.utils import datetime
-from app.scheduler import start_scheduler, shutdown_scheduler
-from contextlib import asynccontextmanager
 
 
 @asynccontextmanager

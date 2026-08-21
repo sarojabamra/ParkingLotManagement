@@ -1,8 +1,8 @@
-from sqlalchemy import Column, Integer, Enum, ForeignKey, UniqueConstraint
+from sqlalchemy import Column, Enum, ForeignKey, Integer, UniqueConstraint
 from sqlalchemy.orm import relationship
 
+from app.constants import ParkingLotStatus, ParkingType
 from app.database import Base
-from app.constants import ParkingType, ParkingLotStatus
 
 
 class Parking(Base):

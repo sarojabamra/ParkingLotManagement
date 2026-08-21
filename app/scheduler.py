@@ -1,5 +1,3 @@
-from datetime import timedelta
-
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from app.database import SessionLocal
