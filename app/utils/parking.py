@@ -216,7 +216,6 @@ def activate_booking(
                 "for your remaining booking duration."
             ),
         )
-
     booking.lot = select_random_lot(alternative_available_lots)
 
     booking.status = ParkingHistoryStatus.ACTIVE
@@ -256,3 +255,26 @@ def create_immediate_parking(
     )
 
     return parking_record
+
+
+def auto_cancel_expired_bookings(db: Session, user_id: int):
+    current_time = datetime.now(IST)
+
+    expired_bookings = (
+        db.query(ParkingHistory)
+        .filter(
+            ParkingHistory.user_id == user_id,
+            ParkingHistory.status == ParkingHistoryStatus.BOOKED,
+            ParkingHistory.in_time < current_time,
+        )
+        .all()
+    )
+
+    for booking in expired_bookings:
+        booking.status = ParkingHistoryStatus.CANCELLED
+        db.add(booking)
+
+    if expired_bookings:
+        db.commit()
+        for booking in expired_bookings:
+            db.refresh(booking)

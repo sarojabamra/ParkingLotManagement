@@ -11,10 +11,14 @@ from app.utils.parking import (
     find_parking_space,
     get_available_lots,
     select_random_lot,
+    auto_cancel_expired_bookings,
 )
 
 
 def get_my_bookings(db: Session, current_user: User):
+
+    auto_cancel_expired_bookings(db, current_user.id)
+
     return (
         db.query(ParkingHistory)
         .filter(

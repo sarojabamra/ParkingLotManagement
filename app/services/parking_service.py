@@ -24,6 +24,7 @@ from app.utils.parking import (
     check_vehicle_active_parking_session,
     activate_booking,
     create_immediate_parking,
+    auto_cancel_expired_bookings,
 )
 from app.utils.fee import calculate_parking_fee
 from app.schemas.parking_space import (
@@ -59,6 +60,8 @@ def get_availability(
 
 
 def get_my_parking_history(db: Session, current_user: User):
+
+    auto_cancel_expired_bookings(db, current_user.id)
     return (
         db.query(ParkingHistory)
         .filter(ParkingHistory.user_id == current_user.id)
