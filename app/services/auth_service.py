@@ -3,6 +3,7 @@ from datetime import timedelta
 
 from dotenv import load_dotenv
 from fastapi import HTTPException, status
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.constants import UserRole
@@ -20,7 +21,9 @@ ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
 
 
 def register_user(request: UserCreate, db: Session):
-    existing_user = db.query(User).filter(User.name == request.name).first()
+    existing_user = (
+        db.query(User).filter(func.lower(User.name) == request.name.lower()).first()
+    )
 
     if existing_user:
         raise HTTPException(
@@ -48,7 +51,7 @@ def login_user(
     username: str,
     password: str,
 ):
-    user = db.query(User).filter(User.name == username).first()
+    user = db.query(User).filter(func.lower(User.name) == username.lower()).first()
 
     if not user:
         raise HTTPException(
