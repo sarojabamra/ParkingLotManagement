@@ -17,7 +17,7 @@ from app.utils.auth import (
 
 load_dotenv()
 
-ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
 
 
 def register_user(request: UserCreate, db: Session):
