@@ -85,7 +85,7 @@ def get_available_lots(
     parking_type: ParkingType,
     start_time: datetime,
     end_time: datetime,
-    error_detail: str = "No parking lots available for the requested time",  # Added default error
+    error_detail: str = "No parking lots available for the requested time",
 ) -> list[int]:
     all_lots_in_level = get_parking_lots_in_level(db, level, parking_type)
 
@@ -257,15 +257,15 @@ def create_immediate_parking(
     return parking_record
 
 
-def auto_cancel_expired_bookings(db: Session, user_id: int):
+def auto_cancel_expired_bookings(db: Session):
+    grace_period = timedelta(minutes=15)
     current_time = datetime.now(IST)
 
     expired_bookings = (
         db.query(ParkingHistory)
         .filter(
-            ParkingHistory.user_id == user_id,
             ParkingHistory.status == ParkingHistoryStatus.BOOKED,
-            ParkingHistory.in_time < current_time,
+            ParkingHistory.in_time < current_time - grace_period,
         )
         .all()
     )
