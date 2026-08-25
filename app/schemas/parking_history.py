@@ -35,13 +35,12 @@ class ParkingUnlockResponse(BaseModel):
     user_id: int
 
 
-# Used when a customer pre-books a parking lot
 class BookingCreate(BaseModel):
-    vehicle_number: str = Field(min_length=1)
-    level: int = Field(gt=0)
-    type: ParkingType
-    start_time: datetime
-    end_time: datetime
+    vehicle_number: str = Field(min_length=1, example="MP09 8282")
+    level: int = Field(gt=0, example=2)
+    type: ParkingType = Field(example=ParkingType.TW)
+    start_time: datetime = Field(example="2026-08-25T11:59:45.895+05:30")
+    end_time: datetime = Field(example="2026-08-25T14:50:45.895+05:30")
 
 
 class BookingResponse(BaseModel):
