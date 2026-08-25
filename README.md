@@ -1,5 +1,7 @@
 # Parking Lot Management System
 
+Deployment link: https://parkinglotmanagement-69xb.onrender.com/docs#/
+
 ## Setup Instructions
 
 ### Prerequisites
