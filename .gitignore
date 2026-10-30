@@ -22,3 +22,5 @@ alembic/versions/*.pyc
 alembic/versions/__pycache__/
 .env
 .env.*
+node_modules/
+frontend/dist/

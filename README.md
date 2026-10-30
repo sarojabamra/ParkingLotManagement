@@ -55,3 +55,13 @@ Start the FastAPI application using Uvicorn:
 ```bash
 uvicorn app.main:app --reload
 ```
+
+### OpenAPI Specification
+
+The generated OpenAPI 3.1 specification is available in [`openapi.json`](./openapi.json). To regenerate it after changing API routes or schemas, run:
+
+```bash
+python -c "import json; from pathlib import Path; from app.main import app; Path('openapi.json').write_text(json.dumps(app.openapi(), indent=2) + '\n')"
+```
+
+FastAPI also serves the interactive documentation at `/docs` and the schema at `/openapi.json` while the application is running.

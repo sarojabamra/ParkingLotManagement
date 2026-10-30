@@ -1,0 +1,1093 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Register",
+        "operationId": "register_auth_register_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login",
+        "operationId": "login_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_login_auth_login_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/parking/availability": {
+      "get": {
+        "tags": [
+          "Parking"
+        ],
+        "summary": "Get Availability",
+        "operationId": "get_availability_parking_availability_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/parking/history": {
+      "get": {
+        "tags": [
+          "Parking"
+        ],
+        "summary": "Get My Parking History",
+        "operationId": "get_my_parking_history_parking_history_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ParkingHistoryResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Get My Parking History Parking History Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/parking/lock": {
+      "post": {
+        "tags": [
+          "Parking"
+        ],
+        "summary": "Lock Parking",
+        "operationId": "lock_parking_parking_lock_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParkingLockRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParkingLockResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/parking/unlock": {
+      "post": {
+        "tags": [
+          "Parking"
+        ],
+        "summary": "Unlock Parking",
+        "operationId": "unlock_parking_parking_unlock_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParkingUnlockRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParkingUnlockResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/bookings/": {
+      "get": {
+        "tags": [
+          "Bookings"
+        ],
+        "summary": "Get My Bookings",
+        "operationId": "get_my_bookings_bookings__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/BookingResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Get My Bookings Bookings  Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Bookings"
+        ],
+        "summary": "Create Booking",
+        "operationId": "create_booking_bookings__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/bookings/{booking_id}": {
+      "delete": {
+        "tags": [
+          "Bookings"
+        ],
+        "summary": "Cancel Booking",
+        "operationId": "cancel_booking_bookings__booking_id__delete",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "booking_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Booking Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/users/{user_id}/role": {
+      "patch": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Update User To Admin",
+        "operationId": "update_user_to_admin_admin_users__user_id__role_patch",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/parking-history": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Get Parking History",
+        "operationId": "get_parking_history_admin_parking_history_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ParkingHistoryResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Get Parking History Admin Parking History Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/admin/parking-history/{vehicle_number}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Get Vehicle History",
+        "operationId": "get_vehicle_history_admin_parking_history__vehicle_number__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vehicle_number",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Vehicle Number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ParkingHistoryResponse"
+                  },
+                  "title": "Response Get Vehicle History Admin Parking History  Vehicle Number  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/parking-spaces": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Create Parking Space",
+        "operationId": "create_parking_space_admin_parking_spaces_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParkingSpaceCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParkingSpaceResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_login_auth_login_post": {
+        "properties": {
+          "grant_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^password$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grant Type"
+          },
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "title": "Password"
+          },
+          "scope": {
+            "type": "string",
+            "title": "Scope",
+            "default": ""
+          },
+          "client_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Id"
+          },
+          "client_secret": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "format": "password",
+            "title": "Client Secret"
+          }
+        },
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "Body_login_auth_login_post"
+      },
+      "BookingCreate": {
+        "properties": {
+          "vehicle_number": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Vehicle Number",
+            "example": "MP09 8282"
+          },
+          "level": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Level",
+            "example": 2
+          },
+          "type": {
+            "$ref": "#/components/schemas/ParkingType",
+            "example": "TW"
+          },
+          "start_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start Time",
+            "example": "2026-08-25T11:59:45.895+05:30"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "End Time",
+            "example": "2026-08-25T14:50:45.895+05:30"
+          }
+        },
+        "type": "object",
+        "required": [
+          "vehicle_number",
+          "level",
+          "type",
+          "start_time",
+          "end_time"
+        ],
+        "title": "BookingCreate"
+      },
+      "BookingResponse": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "vehicle_number": {
+            "type": "string",
+            "title": "Vehicle Number"
+          },
+          "level": {
+            "type": "integer",
+            "title": "Level"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ParkingType"
+          },
+          "lot": {
+            "type": "integer",
+            "title": "Lot"
+          },
+          "in_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "In Time"
+          },
+          "scheduled_out_time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheduled Out Time"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ParkingHistoryStatus"
+          },
+          "user_id": {
+            "type": "integer",
+            "title": "User Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "vehicle_number",
+          "level",
+          "type",
+          "lot",
+          "in_time",
+          "scheduled_out_time",
+          "status",
+          "user_id"
+        ],
+        "title": "BookingResponse"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ParkingHistoryResponse": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "integer",
+            "title": "User Id"
+          },
+          "level": {
+            "type": "integer",
+            "title": "Level"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ParkingType"
+          },
+          "vehicle_number": {
+            "type": "string",
+            "title": "Vehicle Number"
+          },
+          "lot": {
+            "type": "integer",
+            "title": "Lot"
+          },
+          "in_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "In Time"
+          },
+          "out_time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Out Time"
+          },
+          "fee": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fee"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ParkingHistoryStatus"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "level",
+          "type",
+          "vehicle_number",
+          "lot",
+          "in_time",
+          "out_time",
+          "fee",
+          "status"
+        ],
+        "title": "ParkingHistoryResponse"
+      },
+      "ParkingHistoryStatus": {
+        "type": "string",
+        "enum": [
+          "BOOKED",
+          "ACTIVE",
+          "COMPLETED",
+          "CANCELLED"
+        ],
+        "title": "ParkingHistoryStatus"
+      },
+      "ParkingLockRequest": {
+        "properties": {
+          "vehicle_number": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Vehicle Number"
+          },
+          "level": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Level"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ParkingType"
+          }
+        },
+        "type": "object",
+        "required": [
+          "vehicle_number",
+          "level",
+          "type"
+        ],
+        "title": "ParkingLockRequest"
+      },
+      "ParkingLockResponse": {
+        "properties": {
+          "vehicle_number": {
+            "type": "string",
+            "title": "Vehicle Number"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ParkingType"
+          },
+          "level": {
+            "type": "integer",
+            "title": "Level"
+          },
+          "lot": {
+            "type": "integer",
+            "title": "Lot"
+          },
+          "locking_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Locking Time"
+          },
+          "user_id": {
+            "type": "integer",
+            "title": "User Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "vehicle_number",
+          "type",
+          "level",
+          "lot",
+          "locking_time",
+          "user_id"
+        ],
+        "title": "ParkingLockResponse"
+      },
+      "ParkingSpaceCreate": {
+        "properties": {
+          "level": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Level"
+          },
+          "twa": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Twa"
+          },
+          "fwa": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Fwa"
+          }
+        },
+        "type": "object",
+        "required": [
+          "level",
+          "twa",
+          "fwa"
+        ],
+        "title": "ParkingSpaceCreate"
+      },
+      "ParkingSpaceResponse": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "level": {
+            "type": "integer",
+            "title": "Level"
+          },
+          "twa": {
+            "type": "integer",
+            "title": "Twa"
+          },
+          "fwa": {
+            "type": "integer",
+            "title": "Fwa"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "level",
+          "twa",
+          "fwa"
+        ],
+        "title": "ParkingSpaceResponse"
+      },
+      "ParkingType": {
+        "type": "string",
+        "enum": [
+          "TW",
+          "FW"
+        ],
+        "title": "ParkingType"
+      },
+      "ParkingUnlockRequest": {
+        "properties": {
+          "vehicle_number": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Vehicle Number"
+          },
+          "level": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Level"
+          },
+          "lot": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Lot"
+          }
+        },
+        "type": "object",
+        "required": [
+          "vehicle_number",
+          "level",
+          "lot"
+        ],
+        "title": "ParkingUnlockRequest"
+      },
+      "ParkingUnlockResponse": {
+        "properties": {
+          "vehicle_number": {
+            "type": "string",
+            "title": "Vehicle Number"
+          },
+          "lot": {
+            "type": "integer",
+            "title": "Lot"
+          },
+          "locking_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Locking Time"
+          },
+          "unlocking_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Unlocking Time"
+          },
+          "parking_fee": {
+            "type": "number",
+            "title": "Parking Fee"
+          },
+          "user_id": {
+            "type": "integer",
+            "title": "User Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "vehicle_number",
+          "lot",
+          "locking_time",
+          "unlocking_time",
+          "parking_fee",
+          "user_id"
+        ],
+        "title": "ParkingUnlockResponse"
+      },
+      "TokenResponse": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type",
+            "default": "bearer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token"
+        ],
+        "title": "TokenResponse"
+      },
+      "UserCreate": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "password"
+        ],
+        "title": "UserCreate"
+      },
+      "UserResponse": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "role": {
+            "$ref": "#/components/schemas/UserRole"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "role"
+        ],
+        "title": "UserResponse"
+      },
+      "UserRole": {
+        "type": "string",
+        "enum": [
+          "ADMIN",
+          "PUBLIC"
+        ],
+        "title": "UserRole"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {},
+            "tokenUrl": "/auth/login"
+          }
+        }
+      }
+    }
+  }
+}
