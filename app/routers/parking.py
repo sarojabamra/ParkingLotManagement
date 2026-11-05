@@ -31,6 +31,18 @@ def get_my_parking_history(
     return parking_service.get_my_parking_history(db, current_user)
 
 
+@router.get(
+    "/users/{user_id}/history",
+    response_model=list[ParkingHistoryResponse],
+)
+def get_user_parking_history(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    return parking_service.get_user_parking_history(db, user_id)
+
+
 # lock/assign lot
 @router.post("/lock", response_model=ParkingLockResponse, status_code=201)
 def lock_parking(

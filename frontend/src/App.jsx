@@ -297,6 +297,21 @@ export default function App() {
     loadAdminHistory(vehicleNumber);
   }
 
+  async function onUserHistorySearch(event) {
+    event.preventDefault();
+    const userId = new FormData(event.target).get("user_id").trim();
+    if (!userId) {
+      loadHistory();
+      return;
+    }
+    try {
+      setHistory(await api(`/parking/users/${userId}/history`));
+    } catch (error) {
+      setHistory([]);
+      handleError(error);
+    }
+  }
+
   const isAdmin = user?.role === "ADMIN";
 
   return (
@@ -572,6 +587,20 @@ export default function App() {
                     Refresh
                   </button>
                 </div>
+                <form className="form inline" onSubmit={onUserHistorySearch}>
+                  <label>
+                    User ID
+                    <input
+                      name="user_id"
+                      type="number"
+                      min="1"
+                      placeholder={user?.id ? String(user.id) : "User id"}
+                    />
+                  </label>
+                  <button type="submit" className="btn">
+                    Load by user id
+                  </button>
+                </form>
                 <DataTable rows={history} columns={HISTORY_COLUMNS} />
               </section>
             )}

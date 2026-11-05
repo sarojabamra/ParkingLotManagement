@@ -67,6 +67,23 @@ def get_my_parking_history(db: Session, current_user: User):
     )
 
 
+def get_user_parking_history(db: Session, user_id: int):
+    user = db.query(User).filter(User.id == user_id).first()
+
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found",
+        )
+
+    return (
+        db.query(ParkingHistory)
+        .filter(ParkingHistory.user_id == user_id)
+        .order_by(ParkingHistory.in_time.desc())
+        .all()
+    )
+
+
 def lock_parking(
     request: ParkingLockRequest,
     db: Session,
